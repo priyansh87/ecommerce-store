@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from '../stores/useUserStore';
+import { Toaster } from 'react-hot-toast';
 const SignUpPage = () => {
      
 
-	const {loading , user , checkingAuth} = useUserStore() ; 
-	
+	const {loading , user , checkingAuth , signUp} = useUserStore() ; 
 
 
     const [formData, setFormData] = useState({
@@ -20,7 +20,8 @@ const SignUpPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault() ; 
-        console.log(formData) ; 
+		signUp( formData )
+        // console.log(formData) ; 
     }
 
 
@@ -159,6 +160,8 @@ const SignUpPage = () => {
 					</p>
 				</div>
 			</motion.div>
+
+			<Toaster/>
 	</div>
    
   )

@@ -69,34 +69,37 @@ export const signup = async (req, res) => {
     }
 };
 
-// Login controller
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email }).select("+password");
-
-
-        if (!user || !(await user.comparePassword(password))) {
-            return res.status(401).json({ message: "Invalid email or password" });
-        }
-
-        const { accessToken, refreshToken } = generateToken(user._id);
-        await storeRefreshToken(user._id, refreshToken);
-        
-        // Set cookies with tokens
-        setCookies(res, accessToken, refreshToken);
-
-        res.status(200).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-        });
+      const { email, password } = req.body;
+      const user = await User.findOne({ email }).select("+password");
+  
+      if (!user) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+  
+      const isPasswordCorrect = await user.comparePassword(password);
+      if (!isPasswordCorrect) {
+        return res.status(401).json({ message: "Invalid email or password" });
+      }
+  
+      const { accessToken, refreshToken } = generateToken(user._id);
+      await storeRefreshToken(user._id, refreshToken);
+  
+      setCookies(res, accessToken, refreshToken);
+  
+      res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
     } catch (error) {
-        console.error("Error in login controller:", error.message);
-        res.status(500).json({ message: "Error while logging in" });
+      console.error("Error in login controller:", error);
+      res.status(500).json({ message: "Error while logging in" });
     }
-};
+  };
+  ;
 
 // Logout controller
 export const logout = async (req, res) => {
