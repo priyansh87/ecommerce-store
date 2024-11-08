@@ -18,7 +18,7 @@ app.use(cors({
   origin: "http://localhost:5173", // replace with your frontend URL
   credentials: true,
 }));
-app.use(express.json()) // allows you to parse json
+app.use(express.json({limit:'10mb'})) // allows you to parse json
 app.use(cookieParser())
 app.use("/api/auth", authRoutes)
 app.use("/api/products", productRoutes)

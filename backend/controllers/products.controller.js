@@ -5,7 +5,7 @@ import cloudinary from "../lib/cloudinary.js";
 // this is for the admin only as only the admin should be able to see the all the listed products 
 export const getAllProducts = async(req , res )=>{
     try {
-        const products = Product.find({}) ; 
+        const products =await Product.find({}) ; 
         res.status(200).json({products}) ;
     } catch (error) {
         console.log("error in get all products controller " , error.message) ; 
@@ -38,6 +38,40 @@ export const getFeaturedProducts = async (req ,res )=>{
 
 
 
+// export const createProduct = async (req, res) => {
+//     try {
+//         const { name, description, price, image, category } = req.body;
+
+//         let cloudinaryResponse = null;
+
+//         if (image) {
+//             // Check for the base64 prefix and add it if it's missing
+// 			const pathOfImage = "/Users/Lenovo/Desktop/ecommerce-website/frontend/public/";
+// 			// const pathOfImage = "/";
+//             const base64Image = image.startsWith("data:") ? image : `${pathOfImage}${image}`;
+            
+//             // Upload to Cloudinary, specifying the image is base64
+//             cloudinaryResponse = await cloudinary.uploader.upload(base64Image, {
+//                 folder: "products",
+//                 resource_type: "image"
+//             });
+//         }
+
+//         const product = await Product.create({
+//             name,
+//             description,
+//             price,
+//             image: cloudinaryResponse?.secure_url || "",
+//             category,
+//         });
+
+//         res.status(201).json(product);
+//     } catch (error) {
+//         console.log("Error in createProduct controller", error);
+//         res.status(500).json({ message: "Server error", error: error.message });
+//     }
+// };
+
 export const createProduct = async (req, res) => {
 	try {
 		const { name, description, price, image, category } = req.body;
@@ -45,7 +79,9 @@ export const createProduct = async (req, res) => {
 		let cloudinaryResponse = null;
 
 		if (image) {
+			console.log("error comes from here ")
 			cloudinaryResponse = await cloudinary.uploader.upload(image, { folder: "products" });
+			console.log("after error ")
 		}
 
 		const product = await Product.create({
@@ -58,10 +94,11 @@ export const createProduct = async (req, res) => {
 
 		res.status(201).json(product);
 	} catch (error) {
-		console.log("Error in createProduct controller", error.message);
+		console.log("Error in createProduct controller", error);
 		res.status(500).json({ message: "Server error", error: error.message });
 	}
 };
+
 
 // delete product from database and image from cloudinary as well 
 export const deleteProduct = async (req, res) => {
