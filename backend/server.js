@@ -9,6 +9,7 @@ import analyticsRoutes from "./routes/analytics.route.js"
 import  cors from "cors"
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser"
 dotenv.config({
     path:"./.env"
 }) ;
@@ -20,6 +21,8 @@ app.use(cors({
 }));
 app.use(express.json({limit:'10mb'})) // allows you to parse json
 app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use( express.static("public")) 
 app.use("/api/auth", authRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/cart" , cartRoutes)

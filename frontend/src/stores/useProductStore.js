@@ -7,14 +7,21 @@ export const useProductStore = create((set) => ({
 	loading: false,
 
 	setProducts: (products) => set({ products }),
-	createProduct: async (productData) => {
+	createProduct: async (formData) => {
+		console.log( "this is the product data from zustand useproductStore: ",formData) ;
+		formData.forEach((value, key) => console.log(key, value));
 		set({ loading: true });
 		try {
-			const res = await axios.post("/create-product", productData);
+			const response = await axios.post('/products/create-product', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data', // Axios will handle this automatically, but you can add this header explicitly if needed
+				},
+			});
 			set((prevState) => ({
-				products: [...prevState.products, res.data],
+				products: [...prevState.products, response.data],
 				loading: false,
 			}));
+			toast.success("product created successfully !!! ")
 		} catch (error) {
 			toast.error(error.response.data.error);
 			set({ loading: false });
