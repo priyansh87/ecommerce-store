@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "../lib/axios";
+import dotenv from "dotenv"
 
 const stripePromise = loadStripe(
-	"pk_test_51KZYccCoOZF2UhtOwdXQl3vcizup20zqKqT9hVUIsVzsdBrhqbUI2fE0ZdEVLdZfeHjeyFXtqaNsyCJCmZWnjNZa00PzMAjlcL"
+	"pk_test_51QGbUgASwPOdv8HbWKJ3D1JkpZA8Uv3Ok72CR8Gdee7H8ulMzhnsLT0J3W6YNsLXhoJxISvxe42QWoOESe3WeqJo00fmPGV46F"
 );
 
 const OrderSummary = () => {
