@@ -23,16 +23,16 @@ An eCommerce platform built with the MERN stack (MongoDB, Express, React, Node.j
 - **Media Uploads:** Image and video uploads using Cloudinary and Multer.
 
 ## 🛠️ Tech Stack
-- **Frontend:** React, Redux, Tailwind CSS (for responsive design)
+- **Frontend:** React, Zustand, Tailwind CSS (for responsive design)
 - **Backend:** Node.js, Express, MongoDB, Redis (for caching)
-- **Data Visualization:** Chart.js or Recharts for graphs on the analytics page
+- **Data Visualization:** Recharts for graphs on the analytics page
 - **Media Storage:** Cloudinary with Multer for handling media uploads
 
 ## 🚀 Setup & Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/ecommerce-website.git
+   git clone https://github.com/priyansh87/ecommerce-store.git
    cd ecommerce-website
    ```
 
@@ -84,11 +84,11 @@ An eCommerce platform built with the MERN stack (MongoDB, Express, React, Node.j
 5. **Run the application:**
    - **Backend:** In the root directory, run:
      ```bash
-     npm start
+     npm run dev
      ```
    - **Frontend:** In the `client` directory, run:
      ```bash
-     npm start
+     npm run dev
      ```
 
 ## 🔐 Environment Variables
@@ -114,5 +114,4 @@ An eCommerce platform built with the MERN stack (MongoDB, Express, React, Node.j
 - **Analytics Dashboard:** Sellers can view sales data and analytics through interactive graphs.
 - **Media Uploads:** Product images are managed using Cloudinary with Multer for easy uploads.
 
-## 🖼️ Screenshots
-Add screenshots of your application here to showcase
+
