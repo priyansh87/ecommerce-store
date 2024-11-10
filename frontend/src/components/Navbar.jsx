@@ -1,29 +1,30 @@
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUserStore } from "../stores/useUserStore";
-function Navbar() {
-    const {user , logout} = useUserStore() ; 
-    const isAdmin = user?.role === "admin" ; 
-    const cart = [1,2,3] ;
-    
-  return (
-    <>
-        <header className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-emerald-800">
-            <div className="container mx-auto px-4 py-3 "> 
-             <div className="flex flex-wrap items-center justify-between">
-             <Link to='/' className='text-2xl font-bold text-emerald-400 items-center space-x-2 flex'>
+import { useCartStore } from "../stores/useCartStore";
+
+const Navbar = () => {
+	const { user, logout } = useUserStore();
+	const isAdmin = user?.role === "admin";
+	const { cart } = useCartStore();
+
+	return (
+		<header className='fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-emerald-800'>
+			<div className='container mx-auto px-4 py-3'>
+				<div className='flex flex-wrap justify-between items-center'>
+					<Link to='/' className='text-2xl font-bold text-emerald-400 items-center space-x-2 flex'>
 						E-Commerce
-			</Link>
-            <nav className ="flex flex-wrap items-center gap-4">
-            <Link
+					</Link>
+
+					<nav className='flex flex-wrap items-center gap-4'>
+						<Link
 							to={"/"}
 							className='text-gray-300 hover:text-emerald-400 transition duration-300
 					 ease-in-out'
 						>
 							Home
 						</Link>
-
-                        {user && (
+						{user && (
 							<Link
 								to={"/cart"}
 								className='relative group text-gray-300 hover:text-emerald-400 transition duration-300 
@@ -41,8 +42,7 @@ function Navbar() {
 								)}
 							</Link>
 						)}
-
-                        {isAdmin && (
+						{isAdmin && (
 							<Link
 								className='bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-md font-medium
 								 transition duration-300 ease-in-out flex items-center'
@@ -53,7 +53,7 @@ function Navbar() {
 							</Link>
 						)}
 
-{user ? (
+						{user ? (
 							<button
 								className='bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
 						rounded-md flex items-center transition duration-300 ease-in-out'
@@ -82,13 +82,10 @@ function Navbar() {
 								</Link>
 							</>
 						)}
-            </nav>
-             </div>
-
-            </div>
-        </header>
-    </>
-  )
-}
-
-export default Navbar
+					</nav>
+				</div>
+			</div>
+		</header>
+	);
+};
+export default Navbar;
