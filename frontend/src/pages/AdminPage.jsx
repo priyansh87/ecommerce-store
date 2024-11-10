@@ -17,6 +17,7 @@ const AdminPage = () => {
 	const [activeTab, setActiveTab] = useState("create");
 	const { fetchAllProducts } = useProductStore();
 
+	// fetching all the products beforehand so that when the  tab is sqitched there is not loading screen 
 	useEffect(() => {
 		fetchAllProducts();
 	}, [fetchAllProducts]);
